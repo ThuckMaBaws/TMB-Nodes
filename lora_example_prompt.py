@@ -20,7 +20,7 @@ class LoRAExamplePrompt:
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ("positive_prompt", "negative_prompt", "model_target")
     FUNCTION = "generate_prompt"
-    CATEGORY = "LoRA Tools"
+    CATEGORY = "TMB_Nodes"
 
     @staticmethod
     def get_lora_names():
