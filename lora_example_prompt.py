@@ -1,5 +1,7 @@
 # lora_example_prompt.py
 
+LORA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "lora")
+
 class lora_example_prompt:
     @classmethod
     def INPUT_TYPES(s):
