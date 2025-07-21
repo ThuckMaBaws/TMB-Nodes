@@ -57,9 +57,9 @@ class LoRAExamplePrompt:
         return (pos, neg, model_type)
 
 NODE_CLASS_MAPPINGS = {
-    "LoRAExamplePrompt": LoRAExamplePrompt,
+    "LoRA_Example_Prompt": LoRA_Example_Prompt,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LoRAExamplePrompt": "LoRA Example Prompt",
+    "LoRA_Example_Prompt": "LoRA Example Prompt",
 }
