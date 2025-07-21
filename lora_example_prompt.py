@@ -11,7 +11,7 @@ class LoRAExamplePrompt:
             "required": {
                 "lora_name": (cls.get_lora_names(),),
                 "model_hint": (
-                    ["auto", "SD1.5", "SDXL", "Flux", "Other"],
+                    ["auto", "SD1.5", "SDXL", "Flux", "Illustrious", "Other"],
                     {"default": "auto"},
                 ),
             },
