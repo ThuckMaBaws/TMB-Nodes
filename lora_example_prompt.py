@@ -2,7 +2,7 @@
 
 import os
 
-LORA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "lora")
+LORA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "loras")
 
 class LoRAExamplePrompt:
     @classmethod
