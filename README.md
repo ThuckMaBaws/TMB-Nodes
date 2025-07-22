@@ -29,7 +29,7 @@ text```
 
 _______________________________________________________________________________________________________________________________________________________
 
-# 🧩 Multi LoRA Loader (ComfyUI Node)
+**## 🧩 Node:  Multi LoRA Loader**
 
 A custom ComfyUI node that allows you to apply multiple LoRA models to a base model without needing a separate stacker.
 
