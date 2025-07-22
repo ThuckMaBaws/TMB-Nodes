@@ -1,8 +1,7 @@
-# lora_example_prompt.py
-
 import os
 
 LORA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "models", "loras")
+
 
 class LoRAExamplePrompt:
     @classmethod
@@ -17,7 +16,7 @@ class LoRAExamplePrompt:
             },
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING")
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING")
     RETURN_NAMES = ("positive_prompt", "negative_prompt", "model_target", "trigger_words")
     FUNCTION = "generate_prompt"
     CATEGORY = "TMB_Nodes"
@@ -55,10 +54,10 @@ class LoRAExamplePrompt:
                 return f.read().strip()
         else:
             return "No trigger words found."
-	
+
     def generate_prompt(self, lora_name, model_hint):
         model_type = self.detect_model(lora_name) if model_hint == "auto" else model_hint
-	trigger_words = self.get_trigger_words(lora_name)
+        trigger_words = self.get_trigger_words(lora_name)
 
         if "anime" in lora_name.lower():
             pos = f"masterpiece, best quality, anime style, 1girl, {{{{lora:{lora_name}:0.7}}}}"
@@ -70,7 +69,8 @@ class LoRAExamplePrompt:
             pos = f"concept art, stylized, dramatic lighting, {{{{lora:{lora_name}:0.5}}}}"
             neg = "bad composition, noisy background"
 
-        return (pos, neg, model_type)
+        return (pos, neg, model_type, trigger_words)
+
 
 NODE_CLASS_MAPPINGS = {
     "LoRAExamplePrompt": LoRAExamplePrompt,
