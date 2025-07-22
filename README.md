@@ -26,7 +26,7 @@ positive_prompt: masterpiece, best quality, anime style, 1girl, {lora:anime_girl
 negative_prompt: lowres, bad anatomy, extra limbs
 model_target: SDXL
 
-_______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________
 
 # 🧩 Multi LoRA Loader (ComfyUI Node)
 
@@ -83,3 +83,4 @@ This node attempts to infer the LoRA’s target base model by checking its filen
 | Flux     | `flux`                            |
 
 It then compares that to the base model string to give you helpful guidance.
+
