@@ -1,87 +1,116 @@
-# TMB-Nodes
+📦 TMB Nodes – Custom LoRA Tools for ComfyUI
+A lightweight, user-focused collection of custom nodes for working with LoRAs in ComfyUI — designed to make LoRA management, previewing, and loading more intuitive and flexible.
 
-# ComfyUI - LoRA Tools
+🔧 Included Nodes
+Node Name	Description
+📝 LoRA Example Prompt	Displays the recommended prompt and model compatibility for a selected LoRA
+🧩 Multi LoRA Loader	Loads up to 5 LoRAs in one node, applies weights, and checks compatibility
 
-A small ComfyUI custom node bundle with utilities for LoRA users.
+📝 LoRA Example Prompt
+This node inspects a LoRA file and provides:
 
-## ✨ Node: LoRA Example Prompt
+🔍 Trigger words and suggested prompts (based on filename or metadata)
 
-This node helps generate example prompts when using LoRA models.
+🧠 Inferred model compatibility (e.g. SD1.5, SDXL, Illustrious)
 
-### Inputs
+📄 A ready-to-copy prompt snippet to help you get started
 
-- `lora_name`: The name of the LoRA (e.g., `anime_girl_sdxl`)
-- `model_hint`: Select `auto` to let the node guess the model (SDXL, SD1.5, Flux), or manually pick one.
+➕ Inputs
+Input	Type	Description
+lora_name	STRING	Dropdown of all LoRAs found in models/lora/ folder
 
-### Outputs
+➡️ Output
+Output	Type	Description
+prompt_text	STRING	Suggested prompt including LoRA trigger words
+compatibility	STRING	Inferred base model compatibility (e.g. SDXL)
 
-- `positive_prompt`
-- `negative_prompt`
-- `model_target`: Inferred or selected base model (e.g., SDXL)
+🧩 Multi LoRA Loader
+Load and apply multiple LoRA files in a single node, with individual weight controls and automatic model compatibility checking.
 
-### Output Example
+🎯 Features
+🔢 Load 1 to 5 LoRAs simultaneously
 
-```text
-positive_prompt: masterpiece, best quality, anime style, 1girl, {lora:anime_girl_sdxl:0.7}
-negative_prompt: lowres, bad anatomy, extra limbs
-model_target: SDXL
-text```
+🎚 Set individual weights
 
-_______________________________________________________________________________________________________________________________________________________
+♻️ Optional reset all weights
 
-**## 🧩 Node:  Multi LoRA Loader**
+⚠️ Warns if a LoRA’s model type mismatches the current model (e.g. SDXL vs SD1.5)
 
-A custom ComfyUI node that allows you to apply multiple LoRA models to a base model without needing a separate stacker.
+➕ Inputs
+Input	Type	Description
+model	MODEL	Base model
+clip	CLIP	CLIP encoder
+num_loras	INT	Number of LoRAs to load (1–5)
+reset_weights	BOOL	If true, resets all weights to 0.5
+lora_X_name	STRING	Dropdown to select LoRA X from disk
+lora_X_weight	FLOAT	LoRA strength (default = 0.5)
 
----
+➡️ Outputs
+Output	Type	Description
+model	MODEL	Model with all LoRAs applied
+clip	CLIP	CLIP encoder with LoRAs applied
+compatibility_info	STRING	Summary of detected compatibility/mismatches
 
-## ✨ Features
+🧠 Model Type Detection
+The loader infers LoRA and model types by filename using the following heuristics:
 
-- 🔢 Load **1–5 LoRAs** simultaneously
-- 🎚 Set individual **weights** per LoRA
-- 🧠 **Auto-detects LoRA model compatibility** (e.g. SD1.5, SDXL, Illustrious, etc.)
-- ⚠️ Warns if LoRA base type doesn't match model
-- 🔁 Optional **reset weights** toggle
-- 🧼 Cleaner and more user-friendly than stacking multiple nodes manually
+Model Type	Detected by keywords like
+SDXL	sdxl, xl_base, xl
+SD1.5	1.5, v1-5, sd15
+SD2.1	2.1, v2, sd21
+Illustrious	illu, illust, illustrious, illubase
+Flux	flux
+Unknown	None matched
 
----
+📂 Installation
+Clone this repo into your ComfyUI/custom_nodes/ folder:
 
-## 🛠 Inputs
+bash
+Copy
+Edit
+cd ComfyUI/custom_nodes/
+git clone https://github.com/ThuckMaBaws/TMB-Nodes.git
+Make sure your TMB_Nodes/__init__.py registers both nodes:
 
-| Input         | Type    | Description                                                                 |
-|---------------|---------|-----------------------------------------------------------------------------|
-| `model`       | MODEL   | The base model to apply LoRAs to                                            |
-| `clip`        | CLIP    | The corresponding CLIP encoder                                              |
-| `num_loras`   | INT     | Number of LoRAs to apply (1 to 5)                                           |
-| `reset_weights` | BOOL  | If true, all LoRA weights reset to default (0.5)                            |
-| `lora_X_name` | STRING  | Dropdown to select a LoRA file (auto-loaded from `models/lora/`)           |
-| `lora_X_weight` | FLOAT | Slider to set the LoRA strength (0.0 to 1.5, default = 0.5)                 |
+python
+Copy
+Edit
+from .lora_example_prompt import NODE_CLASS_MAPPINGS as PROMPT_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as PROMPT_DISPLAY
+from .multi_lora_loader import NODE_CLASS_MAPPINGS as MULTI_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as MULTI_DISPLAY
 
-> Replace `X` with numbers 1–5 depending on how many LoRAs you are loading.
+NODE_CLASS_MAPPINGS = {}
+NODE_DISPLAY_NAME_MAPPINGS = {}
 
----
+NODE_CLASS_MAPPINGS.update(PROMPT_MAPPINGS)
+NODE_DISPLAY_NAME_MAPPINGS.update(PROMPT_DISPLAY)
 
-## 🔁 Outputs
+NODE_CLASS_MAPPINGS.update(MULTI_MAPPINGS)
+NODE_DISPLAY_NAME_MAPPINGS.update(MULTI_DISPLAY)
+Restart ComfyUI.
 
-| Output               | Type    | Description                                   |
-|----------------------|---------|-----------------------------------------------|
-| `model`              | MODEL   | The updated model with all LoRAs applied      |
-| `clip`               | CLIP    | The updated CLIP with all LoRAs applied       |
-| `compatibility_info` | STRING  | A message with compatibility warnings or OK ✅ |
+🧪 Example Workflow
+text
+Copy
+Edit
+[LoRA Example Prompt] --> (View recommendations)
+       ↓
+[Multi LoRA Loader]  --> (Apply 3–5 LoRAs with weights)
+       ↓
+[Text to Image / etc.]
+📎 Notes
+Works with .safetensors, .pt, or .ckpt LoRAs
 
----
+All LoRA files must be in your models/lora/ folder
 
-## 🧠 Model Compatibility Detection
+You can increase the max LoRA count in the loader if needed
 
-This node attempts to infer the LoRA’s target base model by checking its filename for keywords like:
+📸 Screenshots (Optional)
+(You can add screenshots of the nodes here once you're ready)
+To include images in GitHub, place them in /media/ and use relative paths:
 
-| Detected | Keywords                          |
-|----------|-----------------------------------|
-| SDXL     | `sdxl`, `xl`, `xl_base`           |
-| SD1.5    | `1.5`, `v1-5`, `sd15`             |
-| SD2.1    | `2.1`, `sd21`, `v2`               |
-| Illustrious | `illu`, `illubase`, `illustrious`, `illust` |
-| Flux     | `flux`                            |
+![Multi LoRA Loader](media/multi-lora-loader.png)
 
-It then compares that to the base model string to give you helpful guidance.
+👤 Author
+TMB Nodes by @ThuckMaBaws
+Issues and pull requests are welcome!
 
