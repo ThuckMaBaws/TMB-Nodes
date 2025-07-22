@@ -1,0 +1,297 @@
+{
+  "id": "600693cd-e047-4709-ae04-06fdb9e6e134",
+  "revision": 0,
+  "last_node_id": 7,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "LoRAExamplePrompt",
+      "pos": [
+        -988.0802001953125,
+        -225.41998291015625
+      ],
+      "size": [
+        270,
+        142
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "positive_prompt",
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        },
+        {
+          "label": "negative_prompt",
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        },
+        {
+          "label": "model_target",
+          "name": "model_target",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        },
+        {
+          "label": "trigger_words",
+          "name": "trigger_words",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "widget_ue_connectable": {},
+        "Node name for S&R": "LoRAExamplePrompt"
+      },
+      "widgets_values": [
+        "OnOffUnder 1.5 2.7",
+        "auto"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 4,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -645.4086303710938,
+        -370.8953552246094
+      ],
+      "size": [
+        349.3059387207031,
+        162.04124450683594
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "label": "STRING",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Positive Prompt",
+      "properties": {
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "concept art, stylized, dramatic lighting, {{lora:OnOffUnder 1.5 2.7:0.5}}"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 5,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -652.3165283203125,
+        -141.0608367919922
+      ],
+      "size": [
+        363.74591064453125,
+        143.72264099121094
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "label": "STRING",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Negative Prompt",
+      "properties": {
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "bad composition, noisy background"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 7,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -272.2098693847656,
+        -368.12738037109375
+      ],
+      "size": [
+        369.91253662109375,
+        144.93154907226562
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "label": "STRING",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Base Model",
+      "properties": {
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "SD1.5"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 6,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -264.53985595703125,
+        -158.08291625976562
+      ],
+      "size": [
+        347.9100036621094,
+        174.6514129638672
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "text",
+          "name": "text",
+          "type": "STRING",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "label": "STRING",
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Trigger Words",
+      "properties": {
+        "widget_ue_connectable": {},
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "No trigger words found."
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    }
+  ],
+  "links": [
+    [
+      2,
+      2,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      2,
+      1,
+      5,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      2,
+      2,
+      7,
+      0,
+      "STRING"
+    ],
+    [
+      5,
+      2,
+      3,
+      6,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 0.8954302432553055,
+      "offset": [
+        1142.3485144092547,
+        513.2972809673821
+      ]
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.22.2",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
