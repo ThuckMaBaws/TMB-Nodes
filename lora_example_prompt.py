@@ -11,14 +11,14 @@ class LoRAExamplePrompt:
             "required": {
                 "lora_name": (cls.get_lora_names(),),
                 "model_hint": (
-                    ["auto", "SD1.5", "SDXL", "Flux", "Illustrious", "Other"],
+                    ["auto", "SD1.5", "SD2.1", "SDXL", "Illustrious", "Flux", "Other"],
                     {"default": "auto"},
                 ),
             },
         }
 
     RETURN_TYPES = ("STRING", "STRING", "STRING")
-    RETURN_NAMES = ("positive_prompt", "negative_prompt", "model_target")
+    RETURN_NAMES = ("positive_prompt", "negative_prompt", "model_target", "trigger_words")
     FUNCTION = "generate_prompt"
     CATEGORY = "TMB_Nodes"
 
@@ -32,17 +32,33 @@ class LoRAExamplePrompt:
 
     def detect_model(self, name):
         name = name.lower()
-        if "xl" in name or "sdxl" in name:
+
+        if any(keyword in name for keyword in ["illustrious", "illubase", "illu", "illust"]):
+            return "Illustrious"
+        elif "xl" in name or "sdxl" in name or "v1-5-xl" in name or "xl_base" in name:
             return "SDXL"
-        elif "1.5" in name or "sd15" in name or "sd1.5" in name:
+        elif "1.5" in name or "v1-5" in name or "sd15" in name:
             return "SD1.5"
+        elif "2.1" in name or "v2" in name or "sd21" in name:
+            return "SD2.1"
         elif "flux" in name:
             return "Flux"
+        elif "other" in name or "misc" in name:
+            return "Other"
         else:
             return "Unknown"
 
+    def get_trigger_words(self, lora_name):
+        txt_file = os.path.join(LORA_PATH, lora_name + ".txt")
+        if os.path.exists(txt_file):
+            with open(txt_file, "r", encoding="utf-8") as f:
+                return f.read().strip()
+        else:
+            return "No trigger words found."
+	
     def generate_prompt(self, lora_name, model_hint):
         model_type = self.detect_model(lora_name) if model_hint == "auto" else model_hint
+	trigger_words = self.get_trigger_words(lora_name)
 
         if "anime" in lora_name.lower():
             pos = f"masterpiece, best quality, anime style, 1girl, {{{{lora:{lora_name}:0.7}}}}"
