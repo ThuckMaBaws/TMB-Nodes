@@ -25,7 +25,7 @@ This node helps generate example prompts when using LoRA models.
 positive_prompt: masterpiece, best quality, anime style, 1girl, {lora:anime_girl_sdxl:0.7}
 negative_prompt: lowres, bad anatomy, extra limbs
 model_target: SDXL
-
+```text
 
 
 
