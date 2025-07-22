@@ -26,7 +26,8 @@ positive_prompt: masterpiece, best quality, anime style, 1girl, {lora:anime_girl
 negative_prompt: lowres, bad anatomy, extra limbs
 model_target: SDXL
 
-______________________________________________________________________________________________________________________________
+
+
 
 # 🧩 Multi LoRA Loader (ComfyUI Node)
 
